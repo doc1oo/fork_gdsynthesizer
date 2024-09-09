@@ -79,7 +79,7 @@ GDSynthesizer::~GDSynthesizer()
 int GDSynthesizer::initSynthe(const int32_t max_note)
 {
     sequencer.initParam(mix_rate, buffer_length/2.0, buf_samples/2);
-    Ref<AudioStreamGenerator> stream = new AudioStreamGenerator();
+    Ref<AudioStreamGenerator> stream = memnew(AudioStreamGenerator);
     set_stream(stream);
     stream->set_mix_rate(mix_rate);
     stream->set_buffer_length(buffer_length);

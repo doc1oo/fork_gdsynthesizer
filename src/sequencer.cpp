@@ -57,12 +57,17 @@ float PinkNoise::makeNoise(float in) {
 }
 
 Sequencer::Sequencer() {
+    rand = memnew(godot::RandomNumberGenerator);
 }
 
 Sequencer::~Sequencer(){
     for (int32_t i = 0; i < std::size(toneInstances); i++) {
         delete [] toneInstances[i].delayBuffer;
         toneInstances[i].delayBuffer = nullptr;
+    }
+
+    if (rand) {
+        memdelete(rand);
     }
 }
 
@@ -344,11 +349,11 @@ bool Sequencer::initParam(double rate, double time, int32_t samples) {
         triangularDistributionLUT = std::make_unique<float[]>(noiseBuffer);
         cos4thPowDistributionLUT  = std::make_unique<float[]>(noiseBuffer);
         for (int32_t i = 0; i < noiseBuffer ; i++){
-            whiteNoiseLUT[i] = (float)rand.randf_range(-1.0, 1.0); // randf_range() returns double.
+            whiteNoiseLUT[i] = (float)rand->randf_range(-1.0, 1.0); // randf_range() returns double.
             double r = godot::Math::absf((double)whiteNoiseLUT[i]);
             double c = godot::Math::absf(1-pow(cos(Math_PI*(r*0.5-0.5)), 4.0));
-            triangularDistributionLUT[i] = (float)rand.randf_range(-r, r);
-            cos4thPowDistributionLUT[i]  = (float)rand.randf_range(-c, c);
+            triangularDistributionLUT[i] = (float)rand->randf_range(-r, r);
+            cos4thPowDistributionLUT[i]  = (float)rand->randf_range(-c, c);
         }
     }
 

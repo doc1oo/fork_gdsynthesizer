@@ -249,7 +249,7 @@ private:
     int32_t numDecaySlopeLUT;
     
     float sustainRate = 0.0;
-    godot::RandomNumberGenerator rand;
+    godot::RandomNumberGenerator *rand;
 
     std::unique_ptr<float []> velocity2powerLUT;
     std::unique_ptr<float []> whiteNoiseLUT;

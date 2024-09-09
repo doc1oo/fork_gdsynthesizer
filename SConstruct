@@ -34,7 +34,7 @@ import os
 import sys
  
 project_name = 'libgdsynthesizer'
-env = SConscript('./godot-cpp-4.2.1-stable/SConstruct')
+env = SConscript('./godot-cpp-godot-4.3-stable/SConstruct')
  
 print('build target:', type(env['target']), env['target'])
 print("env['CCFLAGS']:", type(env['CCFLAGS']), env['CCFLAGS'])
